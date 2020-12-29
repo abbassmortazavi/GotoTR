@@ -141,8 +141,8 @@ class UserController extends Controller
         return $code;
         /*try{
 
-            $username = '9111005787';
-            $password = '5414';
+            $username = '';
+            $password = '';
             $api = new MelipayamakApi($username,$password);
             $sms = $api->sms();
             $to = $mobile;
