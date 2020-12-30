@@ -47,7 +47,7 @@
 
             </div>
         @endif
-        <form method="post" action="{{ url('/register') }}">
+        <form method="post" action="{{ url('/userRegister') }}">
             @csrf
 
             <div class="form-group has-feedback{{ $errors->has('name') ? ' has-error' : '' }}">

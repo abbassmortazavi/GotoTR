@@ -31,8 +31,10 @@ Route::resource('food', App\Http\Controllers\FoodController::class);
 
 
 Route::post('/login', '\App\Http\Controllers\UserController@login')->name('login.verification.resend');
-Route::post('/register', '\App\Http\Controllers\UserController@register');
+Route::post('/userRegister', '\App\Http\Controllers\UserController@register')->name('user.register');
 Route::post('/checkCode', '\App\Http\Controllers\UserController@checkCode');
 Route::get('/resendCode', '\App\Http\Controllers\UserController@resendCode')->name('code.resendCode');
+Route::get('/verify/{token}', '\App\Http\Controllers\VerifyController@VerifyEmail')->name('verify');
+
 
 

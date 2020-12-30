@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\VerificationEmail;
 use App\Models\ActivationCode;
 use App\Models\User;
 use Carbon\Carbon;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use PHPUnit\Exception;
@@ -247,11 +249,14 @@ class UserController extends Controller
 //            'password' => ['required', 'string', 'min:4'],
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'tell' => $request['tell'],
+            'email_verification_token' => Str::random(32)
         ]);
+
+        Mail::to($user->email)->send(new VerificationEmail($user));
         return back()->withErrors(['message'=>'register SuccessFully']);
     }
 
